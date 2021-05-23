@@ -1,0 +1,32 @@
+project_name: convert
+
+env_files:
+  github_token: ${{ secrets.GITHUB_TOKEN }}
+
+release:
+  github:
+    owner: go-animal-crossing
+    name: convert
+
+builds:
+  - binary: convert
+    id: convert
+    main: ./main.go
+    goos:
+      - freebsd
+      - openbsd
+      - solaris
+      - linux
+      - darwin
+    goarch:
+      - amd64
+      - '386'
+      - arm
+      - arm64
+archives:
+  -
+    name_template: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}{{ if .Mips }}_{{ .Mips }}{{ end }}"
+    replacements:
+      darwin: Darwin
+      linux: Linux
+      amd64: x86_64
