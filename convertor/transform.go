@@ -96,6 +96,8 @@ func availability(item apistructures.Item) targetstructures.Availability {
 }
 
 func meta(item apistructures.Item) targetstructures.Meta {
+	t := time.Now().UTC()
+
 	available := ((len(item.Availability.MonthArrayNorthern) > 0) ||
 		(len(item.Availability.MonthArraySouthern) > 0))
 
@@ -109,7 +111,7 @@ func meta(item apistructures.Item) targetstructures.Meta {
 	}
 
 	return targetstructures.Meta{
-		Time: time.Now().UTC(),
+		Time: t,
 		Has:  has,
 	}
 }
@@ -128,13 +130,13 @@ func attributes(item apistructures.Item) targetstructures.Attributes {
 	}
 }
 func transform(item apistructures.Item) targetstructures.Item {
-
 	target := targetstructures.Item{
 		ID:         item.ID(),
 		Attributes: attributes(item),
 		Meta:       meta(item),
 		Converted:  true,
 	}
+	target.Meta.Is = GenerateIs(target.Meta.Time, target)
 
 	return target
 

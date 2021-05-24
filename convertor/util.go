@@ -6,6 +6,15 @@ import (
 	"time"
 )
 
+func Contains(flat []int, val int) bool {
+	for _, m := range flat {
+		if m == val {
+			return true
+		}
+	}
+	return false
+}
+
 func Safe(str string) string {
 	str = strings.ReplaceAll(str, "'", "")
 	str = strings.ReplaceAll(str, "\"", "")

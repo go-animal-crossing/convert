@@ -35,43 +35,25 @@ func write(fs afero.Fs, directory string, out targetstructures.Output) {
 
 func Convert(fs afero.Fs, directory string, items []apistructures.Item) {
 	var mutex = &sync.Mutex{}
-
 	wp := workerpool.New(poolSize)
-	all := map[string]targetstructures.Item{}
-	bugs := map[string]targetstructures.Item{}
-	fish := map[string]targetstructures.Item{}
-	sea := map[string]targetstructures.Item{}
+	out := targetstructures.New()
 
 	for _, item := range items {
 		//d := directory
 		i := item
 		wp.Submit(func() {
-			item := transform(i)
+			transformed := transform(i)
+
 			// lock and add to map
 			mutex.Lock()
-			id := item.ID
-			all[id] = item
-			// append
-			switch t := item.Attributes.Type.Slug; t {
-			case "bugs":
-				bugs[id] = item
-			case "fish":
-				fish[id] = item
-			case "sea-creatures":
-				sea[id] = item
-			}
-
+			out.Add(transformed)
 			mutex.Unlock()
-			fmt.Printf("  >> [%s]:[%s] = [%s]\n", i.Type, i.Names.EuEn, item.Attributes.Titles.Safe)
+
+			fmt.Printf("  >> [%s]:[%s] = [%s]\n", i.Type, i.Names.EuEn, transformed.Attributes.Titles.Safe)
 		})
 	}
 	wp.StopWait()
 
-	out := targetstructures.Output{
-		Bugs:         bugs,
-		Fish:         fish,
-		SeaCreatures: sea,
-	}
 	write(fs, directory, out)
 
 }
