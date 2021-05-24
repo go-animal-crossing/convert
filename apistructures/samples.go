@@ -10,6 +10,7 @@ import (
 	"github.com/spf13/afero"
 )
 
+// Samples returns dummy data - include known data issues
 func Samples() map[string][]Item {
 	samples := map[string][]Item{}
 	fs := afero.NewOsFs()
