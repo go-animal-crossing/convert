@@ -8,29 +8,29 @@ import (
 )
 
 func Test_titles(t *testing.T) {
-	simple := apistructures.Samples()["simple"]
+	simple := apistructures.Samples()["simple"][0]
 	actual := titles(simple)
 	assert.Equal(t, simple.Names.EuEn, actual.Original, "Name should match")
 	assert.Equal(t, "Bitterling", actual.Safe, "Title friendly name")
 }
 
 func Test_uris(t *testing.T) {
-	simple := apistructures.Samples()["simple"]
+	simple := apistructures.Samples()["simple"][0]
 	actual := uris(simple)
 	assert.Equal(t, "bitterling", actual.Slug, "Slug should match")
 	assert.Equal(t, "/fish/bitterling", actual.URL, "URL should be generated with type and slug")
 }
 
 func Test_prices(t *testing.T) {
-	simple := apistructures.Samples()["simple"]
+	simple := apistructures.Samples()["simple"][0]
 	actual := prices(simple)
 	assert.Equal(t, 900, actual.Store, "Store should 900")
-	assert.Equal(t, 1350, actual.Flick, "Flick should be 1350")
-	assert.Equal(t, 0, actual.Cj, "CJ should be empty")
+	assert.Equal(t, 1350, actual.Cj, "Cj should be 1350")
+	assert.Equal(t, 0, actual.Flick, "Flick should be empty")
 }
 
 func Test_phrases(t *testing.T) {
-	simple := apistructures.Samples()["simple"]
+	simple := apistructures.Samples()["simple"][0]
 	actual := phrases(simple)
 	assert.Equal(t, simple.CatchPhrase, actual.Capture.Original, "Capture catchpharse should match")
 	assert.Equal(t, Safe(simple.CatchPhrase), actual.Capture.Safe, "Safe version should match safe result")
@@ -38,7 +38,7 @@ func Test_phrases(t *testing.T) {
 }
 
 func Test_images(t *testing.T) {
-	simple := apistructures.Samples()["simple"]
+	simple := apistructures.Samples()["simple"][0]
 	actual := images(simple)
 	thumb := ImagePath(simple.Type, "thumb", simple.FileName, "png")
 	assert.Equal(t, simple.IconURI, actual.Thumb.Direct, "Image paths should match")
@@ -47,7 +47,7 @@ func Test_images(t *testing.T) {
 }
 
 func Test_availability(t *testing.T) {
-	simple := apistructures.Samples()["simple"]
+	simple := apistructures.Samples()["simple"][0]
 	actual := availability(simple)
 
 	assert.Equal(t, simple.Availability.Location, actual.Location, "Locations match")
@@ -73,7 +73,7 @@ func Test_availability(t *testing.T) {
 }
 
 func Test_has(t *testing.T) {
-	simple := apistructures.Samples()["simple"]
+	simple := apistructures.Samples()["simple"][0]
 	actual := meta(simple)
 	// test has
 	assert.True(t, actual.Has.Location)
