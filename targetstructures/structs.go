@@ -2,6 +2,22 @@ package targetstructures
 
 import "time"
 
+type Output struct {
+	Bugs         map[string]Item `json:"bugs"`
+	Fish         map[string]Item `json:"fish"`
+	SeaCreatures map[string]Item `json:"seacreatures"`
+	New          Filtered        `json:"new"`
+	Leaving      Filtered        `json:"leaving"`
+	Available    Filtered        `json:"available"`
+}
+
+type Filtered struct {
+	All          map[string]Item `json:"all"`
+	Bugs         map[string]Item `json:"bugs"`
+	Fish         map[string]Item `json:"fish"`
+	SeaCreatures map[string]Item `json:"seacreatures"`
+}
+
 // Item is a target structure
 type Item struct {
 	ID         string     `json:"id"`

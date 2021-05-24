@@ -18,24 +18,25 @@ var typeMeta = map[string]targetstructures.TypeMeta{
 	"sea":  {Title: "Sea Creatures", Slug: "sea-creatures"},
 }
 
-func Convert(fs afero.Fs, directory string, items []apistructures.Item) {
+func Convert(fs afero.Fs, directory string, items []apistructures.Item) map[string]targetstructures.Item {
 	var mutex = &sync.Mutex{}
 
 	wp := workerpool.New(poolSize)
-	converted := make([]targetstructures.Item, 0)
+	converted := map[string]targetstructures.Item{}
 
 	for _, item := range items {
 		//d := directory
 		i := item
 		wp.Submit(func() {
 			item := transform(i)
-			// lock and add
+			// lock and add to map
 			mutex.Lock()
-			converted = append(converted, item)
+			converted[item.ID] = item
 			mutex.Unlock()
 			fmt.Printf("  >> [%s]:[%s] = [%s]\n", i.Type, i.Names.EuEn, item.Attributes.Titles.Safe)
 		})
 	}
 	wp.StopWait()
 
+	return converted
 }
