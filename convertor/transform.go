@@ -129,7 +129,7 @@ func attributes(item apistructures.Item) targetstructures.Attributes {
 		Availability: availability(item),
 	}
 }
-func transform(item apistructures.Item) targetstructures.Item {
+func Transform(item apistructures.Item) targetstructures.Item {
 	target := targetstructures.Item{
 		ID:         item.ID(),
 		Attributes: attributes(item),

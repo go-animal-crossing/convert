@@ -42,7 +42,7 @@ func Convert(fs afero.Fs, directory string, items []apistructures.Item) {
 		//d := directory
 		i := item
 		wp.Submit(func() {
-			transformed := transform(i)
+			transformed := Transform(i)
 
 			// lock and add to map
 			mutex.Lock()

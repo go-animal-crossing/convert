@@ -14,7 +14,7 @@ func Test_IsNew(t *testing.T) {
 	items := map[string]targetstructures.Item{}
 
 	for _, i := range testItems {
-		tran := transform(apistructures.DataFixes(i))
+		tran := Transform(apistructures.DataFixes(i))
 		k := tran.Attributes.URIS.Slug
 		items[k] = tran
 	}
@@ -58,7 +58,7 @@ func Test_Leaving(t *testing.T) {
 	items := map[string]targetstructures.Item{}
 
 	for _, i := range testItems {
-		tran := transform(apistructures.DataFixes(i))
+		tran := Transform(apistructures.DataFixes(i))
 		k := tran.Attributes.URIS.Slug
 		items[k] = tran
 	}
@@ -95,7 +95,7 @@ func Test_Available(t *testing.T) {
 	items := map[string]targetstructures.Item{}
 
 	for _, i := range testItems {
-		tran := transform(apistructures.DataFixes(i))
+		tran := Transform(apistructures.DataFixes(i))
 		k := tran.Attributes.URIS.Slug
 		items[k] = tran
 	}
