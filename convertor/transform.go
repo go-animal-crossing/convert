@@ -66,6 +66,7 @@ func availability(item apistructures.Item) targetstructures.Availability {
 		Array:  item.Availability.MonthArrayNorthern,
 	}
 	north.Sequences = GenerateSequences(north.Array)
+	north.Text = GenerateSequenceText(north.Sequences)
 
 	south := targetstructures.Hemisphere{
 		Always: item.Availability.IsAllYear,
@@ -73,6 +74,7 @@ func availability(item apistructures.Item) targetstructures.Availability {
 		Array:  item.Availability.MonthArraySouthern,
 	}
 	south.Sequences = GenerateSequences(south.Array)
+	south.Text = GenerateSequenceText(south.Sequences)
 
 	months := targetstructures.Months{
 		Always:   item.Availability.IsAllYear,
