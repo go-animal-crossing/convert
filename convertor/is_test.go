@@ -103,22 +103,22 @@ func Test_Available(t *testing.T) {
 	abalone := items["abalone"]
 	jan := time.Date(2021, time.Month(1), 1, 1, 0, 0, 0, time.UTC)
 	is := GenerateIs(jan, abalone)
-	assert.True(t, is.Northern.Availabile)
-	assert.True(t, is.Southern.Availabile)
+	assert.True(t, is.Northern.Available)
+	assert.True(t, is.Southern.Available)
 
 	march := time.Date(2021, time.Month(3), 1, 1, 0, 0, 0, time.UTC)
 	is = GenerateIs(march, abalone)
 
-	assert.False(t, is.Northern.Availabile)
-	assert.True(t, is.Southern.Availabile)
+	assert.False(t, is.Northern.Available)
+	assert.True(t, is.Southern.Available)
 
 	// base is always available
 	bass := items["sea-bass"]
 	for i := 1; i <= 12; i++ {
 		m := time.Date(2021, time.Month(i), 1, 1, 0, 0, 0, time.UTC)
 		is = GenerateIs(m, bass)
-		assert.True(t, is.Northern.Availabile)
-		assert.True(t, is.Southern.Availabile)
+		assert.True(t, is.Northern.Available)
+		assert.True(t, is.Southern.Available)
 	}
 
 }

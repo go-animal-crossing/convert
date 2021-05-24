@@ -20,8 +20,8 @@ func Test_Add_simple(t *testing.T) {
 	assert.Equal(t, len(r.Leaving.Southern.All), 0)
 	assert.Equal(t, len(r.New.Northern.All), 0)
 	assert.Equal(t, len(r.New.Southern.All), 0)
-	assert.Equal(t, len(r.Availabile.Northern.All), 0)
-	assert.Equal(t, len(r.Availabile.Southern.All), 1)
+	assert.Equal(t, len(r.Available.Northern.All), 0)
+	assert.Equal(t, len(r.Available.Southern.All), 1)
 
 }
 

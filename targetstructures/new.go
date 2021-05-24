@@ -10,6 +10,7 @@ func New() Output {
 		Fish: make(map[string]Item),
 		Sea:  make(map[string]Item),
 		Leaving: ItemTypeHemisphere{
+			All: make(map[string]Item),
 			Northern: TypedItems{
 				All:  make(map[string]Item),
 				Bugs: make(map[string]Item),
@@ -24,6 +25,7 @@ func New() Output {
 			},
 		},
 		New: ItemTypeHemisphere{
+			All: make(map[string]Item),
 			Northern: TypedItems{
 				All:  make(map[string]Item),
 				Bugs: make(map[string]Item),
@@ -37,7 +39,8 @@ func New() Output {
 				Sea:  make(map[string]Item),
 			},
 		},
-		Availabile: ItemTypeHemisphere{
+		Available: ItemTypeHemisphere{
+			All: make(map[string]Item),
 			Northern: TypedItems{
 				All:  make(map[string]Item),
 				Bugs: make(map[string]Item),

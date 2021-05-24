@@ -3,19 +3,20 @@ package targetstructures
 import "time"
 
 type Output struct {
-	Time       time.Time          `json:"time_generated"`
-	All        map[string]Item    `json:"all"`
-	Bugs       map[string]Item    `json:"bugs"`
-	Fish       map[string]Item    `json:"fish"`
-	Sea        map[string]Item    `json:"sea"`
-	Leaving    ItemTypeHemisphere `json:"leaving"`
-	New        ItemTypeHemisphere `json:"new"`
-	Availabile ItemTypeHemisphere `json:"available"`
+	Time      time.Time          `json:"time_generated"`
+	All       map[string]Item    `json:"all"`
+	Bugs      map[string]Item    `json:"bugs"`
+	Fish      map[string]Item    `json:"fish"`
+	Sea       map[string]Item    `json:"sea"`
+	Leaving   ItemTypeHemisphere `json:"leaving"`
+	New       ItemTypeHemisphere `json:"new"`
+	Available ItemTypeHemisphere `json:"available"`
 }
 
 type ItemTypeHemisphere struct {
-	Northern TypedItems `json:"northern"`
-	Southern TypedItems `json:"southern"`
+	All      map[string]Item `json:"all"`
+	Northern TypedItems      `json:"northern"`
+	Southern TypedItems      `json:"southern"`
 }
 
 type TypedItems struct {
@@ -43,9 +44,9 @@ type Has struct {
 }
 
 type IsHemisphere struct {
-	New        bool `json:"new"`
-	Leaving    bool `json:"leaving"`
-	Availabile bool `json:"available"`
+	New       bool `json:"new"`
+	Leaving   bool `json:"leaving"`
+	Available bool `json:"available"`
 }
 
 type Is struct {

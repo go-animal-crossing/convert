@@ -15,9 +15,9 @@ var directories = map[string]string{
 }
 
 func main() {
-	fmt.Printf("Starting conversion..\n")
+	fmt.Printf("Starting conversion..\n\n")
 	fs := afero.NewOsFs()
 	items := load.Load(fs, directories["data"])
 	convertor.Convert(fs, directories["converted"], items)
-	fmt.Printf("Ending conversion..\n")
+	fmt.Printf("\nEnding conversion..\n")
 }

@@ -34,15 +34,15 @@ func IsAvailable(t time.Time, sequences []int, always bool) bool {
 func GenerateIs(t time.Time, item targetstructures.Item) targetstructures.Is {
 	n := item.Attributes.Availability.Months.Northern
 	north := targetstructures.IsHemisphere{
-		New:        IsNew(t, n.Sequences, n.Always),
-		Leaving:    IsLeaving(t, n.Sequences, n.Always),
-		Availabile: IsAvailable(t, n.Array, n.Always),
+		New:       IsNew(t, n.Sequences, n.Always),
+		Leaving:   IsLeaving(t, n.Sequences, n.Always),
+		Available: IsAvailable(t, n.Array, n.Always),
 	}
 	s := item.Attributes.Availability.Months.Southern
 	south := targetstructures.IsHemisphere{
-		New:        IsNew(t, s.Sequences, s.Always),
-		Leaving:    IsLeaving(t, s.Sequences, s.Always),
-		Availabile: IsAvailable(t, s.Array, s.Always),
+		New:       IsNew(t, s.Sequences, s.Always),
+		Leaving:   IsLeaving(t, s.Sequences, s.Always),
+		Available: IsAvailable(t, s.Array, s.Always),
 	}
 	return targetstructures.Is{Northern: north, Southern: south}
 }

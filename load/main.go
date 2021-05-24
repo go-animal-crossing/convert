@@ -24,11 +24,11 @@ func UnmarshalFile(content []byte) []apistructures.Item {
 func Load(fs afero.Fs, directory string) []apistructures.Item {
 	items := make([]apistructures.Item, 0)
 	files, _ := Files(fs, directory, "*.json")
-	fmt.Printf("  > Found [%d] files\n", len(files))
+	fmt.Printf("Found [%d] files\n", len(files))
 
 	for _, file := range files {
 		itemType := strings.ReplaceAll(filepath.Base(file), ".json", "")
-		fmt.Printf("  > Loading items from file: [%s]\n", file)
+		fmt.Printf("Loading items from file: [%s]\n", file)
 
 		content, _ := afero.ReadFile(fs, file)
 		loaded := UnmarshalFile(content)
@@ -41,7 +41,7 @@ func Load(fs afero.Fs, directory string) []apistructures.Item {
 		}
 
 	}
-	fmt.Printf("  > Loaded [%d] items\n", len(items))
+	fmt.Printf("Loaded [%d] items\n", len(items))
 
 	return items
 }

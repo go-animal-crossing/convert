@@ -25,6 +25,9 @@ func (o *Output) addToType(item Item, id string, itemType string) {
 }
 
 func (o *Output) addToLeaving(item Item, id string, itemType string) {
+	if item.Meta.Is.Northern.Leaving || item.Meta.Is.Southern.Leaving {
+		o.Leaving.All[id] = item
+	}
 	if item.Meta.Is.Northern.Leaving {
 		typedAdd(&o.Leaving.Northern, item, id, itemType)
 	}
@@ -34,6 +37,10 @@ func (o *Output) addToLeaving(item Item, id string, itemType string) {
 }
 
 func (o *Output) addToNew(item Item, id string, itemType string) {
+	if item.Meta.Is.Northern.New || item.Meta.Is.Southern.New {
+		o.New.All[id] = item
+	}
+
 	if item.Meta.Is.Northern.New {
 		typedAdd(&o.New.Northern, item, id, itemType)
 	}
@@ -43,11 +50,15 @@ func (o *Output) addToNew(item Item, id string, itemType string) {
 }
 
 func (o *Output) addToAvailable(item Item, id string, itemType string) {
-	if item.Meta.Is.Northern.Availabile {
-		typedAdd(&o.Availabile.Northern, item, id, itemType)
+	if item.Meta.Is.Northern.Available || item.Meta.Is.Southern.Available {
+		o.Available.All[id] = item
 	}
-	if item.Meta.Is.Southern.Availabile {
-		typedAdd(&o.Availabile.Southern, item, id, itemType)
+
+	if item.Meta.Is.Northern.Available {
+		typedAdd(&o.Available.Northern, item, id, itemType)
+	}
+	if item.Meta.Is.Southern.Available {
+		typedAdd(&o.Available.Southern, item, id, itemType)
 	}
 }
 
