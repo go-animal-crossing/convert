@@ -14,8 +14,9 @@ func titles(item apistructures.Item) targetstructures.Safe {
 }
 
 func uris(item apistructures.Item) targetstructures.Uris {
+	t := typeMeta[item.Type]
 	return targetstructures.Uris{
-		URL:  URL(item.Type, Safe(item.Names.EuEn)),
+		URL:  URL(t.Slug, Safe(item.Names.EuEn)),
 		Slug: Slugify(Safe(item.Names.EuEn)),
 	}
 }
