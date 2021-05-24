@@ -1,6 +1,7 @@
 package convertor
 
 import (
+	"convert/util"
 	"fmt"
 )
 
@@ -37,13 +38,13 @@ func GenerateSequenceText(sequences [][]int) string {
 
 	dateString := ""
 	// date format to use for outputting string (currently full month name)
-	f := DateFormat()
+	f := util.DateFormat()
 
 	for i, sequence := range sequences {
 		// first item in the slice
 		// - grab and generate a Time
 		first := sequence[0]
-		firstDate := MonthToTime(first)
+		firstDate := util.MonthToTime(first)
 		// always have a "," at the start, unless this is the first item
 		prefix := ", "
 		if i == 0 {
@@ -56,7 +57,7 @@ func GenerateSequenceText(sequences [][]int) string {
 
 		if l > 1 {
 			last := sequence[l-1]
-			lastDate := MonthToTime(last)
+			lastDate := util.MonthToTime(last)
 			dateString = fmt.Sprintf("%s - %s", dateString, lastDate.Format(f))
 		}
 
@@ -64,16 +65,4 @@ func GenerateSequenceText(sequences [][]int) string {
 	//fmt.Printf("%v => %v\n", sequences, dateString)
 	return dateString
 
-}
-
-// return the nth index of each sequence
-func NthOfSequences(sequences [][]int, n int) (ns []int) {
-	for _, seq := range sequences {
-		check := n
-		if n == -1 {
-			check = len(seq) - 1
-		}
-		ns = append(ns, seq[check])
-	}
-	return
 }

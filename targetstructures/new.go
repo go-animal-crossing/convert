@@ -9,49 +9,40 @@ func New() Output {
 		Bugs: make(map[string]Item),
 		Fish: make(map[string]Item),
 		Sea:  make(map[string]Item),
-		Leaving: ItemTypeHemisphere{
-			All: make(map[string]Item),
-			Northern: TypedItems{
-				All:  make(map[string]Item),
-				Bugs: make(map[string]Item),
-				Fish: make(map[string]Item),
-				Sea:  make(map[string]Item),
+		Leaving: Listing{
+			Current: make(map[string]Item),
+			Months:  make(map[string]map[string]Item),
+			Northern: ListingByHemisphere{
+				Current: make(map[string]Item),
+				Months:  make(map[string]map[string]Item),
 			},
-			Southern: TypedItems{
-				All:  make(map[string]Item),
-				Bugs: make(map[string]Item),
-				Fish: make(map[string]Item),
-				Sea:  make(map[string]Item),
+			Southern: ListingByHemisphere{
+				Current: make(map[string]Item),
+				Months:  make(map[string]map[string]Item),
 			},
 		},
-		New: ItemTypeHemisphere{
-			All: make(map[string]Item),
-			Northern: TypedItems{
-				All:  make(map[string]Item),
-				Bugs: make(map[string]Item),
-				Fish: make(map[string]Item),
-				Sea:  make(map[string]Item),
+		New: Listing{
+			Current: make(map[string]Item),
+			Months:  make(map[string]map[string]Item),
+			Northern: ListingByHemisphere{
+				Current: make(map[string]Item),
+				Months:  make(map[string]map[string]Item),
 			},
-			Southern: TypedItems{
-				All:  make(map[string]Item),
-				Bugs: make(map[string]Item),
-				Fish: make(map[string]Item),
-				Sea:  make(map[string]Item),
+			Southern: ListingByHemisphere{
+				Current: make(map[string]Item),
+				Months:  make(map[string]map[string]Item),
 			},
 		},
-		Available: ItemTypeHemisphere{
-			All: make(map[string]Item),
-			Northern: TypedItems{
-				All:  make(map[string]Item),
-				Bugs: make(map[string]Item),
-				Fish: make(map[string]Item),
-				Sea:  make(map[string]Item),
+		Available: Listing{
+			Current: make(map[string]Item),
+			Months:  make(map[string]map[string]Item),
+			Northern: ListingByHemisphere{
+				Current: make(map[string]Item),
+				Months:  make(map[string]map[string]Item),
 			},
-			Southern: TypedItems{
-				All:  make(map[string]Item),
-				Bugs: make(map[string]Item),
-				Fish: make(map[string]Item),
-				Sea:  make(map[string]Item),
+			Southern: ListingByHemisphere{
+				Current: make(map[string]Item),
+				Months:  make(map[string]map[string]Item),
 			},
 		},
 	}

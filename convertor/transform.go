@@ -3,21 +3,22 @@ package convertor
 import (
 	"convert/apistructures"
 	"convert/targetstructures"
+	"convert/util"
 	"time"
 )
 
 func titles(item apistructures.Item) targetstructures.Safe {
 	return targetstructures.Safe{
 		Original: item.Names.EuEn,
-		Safe:     Title(Safe(item.Names.EuEn)),
+		Safe:     util.Title(util.Safe(item.Names.EuEn)),
 	}
 }
 
 func uris(item apistructures.Item) targetstructures.Uris {
 	t := typeMeta[item.Type]
 	return targetstructures.Uris{
-		URL:  URL(t.Slug, Safe(item.Names.EuEn)),
-		Slug: Slugify(Safe(item.Names.EuEn)),
+		URL:  util.URL(t.Slug, util.Safe(item.Names.EuEn)),
+		Slug: util.Slugify(util.Safe(item.Names.EuEn)),
 	}
 }
 
@@ -32,11 +33,11 @@ func prices(item apistructures.Item) targetstructures.Prices {
 func phrases(item apistructures.Item) targetstructures.Phrases {
 	capture := targetstructures.Safe{
 		Original: item.CatchPhrase,
-		Safe:     Safe(item.CatchPhrase),
+		Safe:     util.Safe(item.CatchPhrase),
 	}
 	museum := targetstructures.Safe{
 		Original: item.MuseumPhrase,
-		Safe:     Safe(item.MuseumPhrase),
+		Safe:     util.Safe(item.MuseumPhrase),
 	}
 	return targetstructures.Phrases{
 		Capture: capture,
@@ -47,11 +48,11 @@ func phrases(item apistructures.Item) targetstructures.Phrases {
 func images(item apistructures.Item) targetstructures.Images {
 	thumb := targetstructures.Image{
 		Direct: item.IconURI,
-		Local:  ImagePath(item.Type, "thumb", item.FileName, "png"),
+		Local:  util.ImagePath(item.Type, "thumb", item.FileName, "png"),
 	}
 	main := targetstructures.Image{
 		Direct: item.ImageURI,
-		Local:  ImagePath(item.Type, "main", item.FileName, "png"),
+		Local:  util.ImagePath(item.Type, "main", item.FileName, "png"),
 	}
 	return targetstructures.Images{
 		Thumb: thumb,

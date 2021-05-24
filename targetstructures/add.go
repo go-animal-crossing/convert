@@ -1,74 +1,117 @@
 package targetstructures
 
-func typedAdd(data *TypedItems, item Item, id string, typeName string) {
-	data.All[id] = item
-	switch t := typeName; t {
-	case "bugs":
-		data.Bugs[id] = item
-	case "fish":
-		data.Fish[id] = item
-	case "sea-creatures":
-		data.Sea[id] = item
-	}
-}
+import (
+	"convert/util"
+	"time"
+)
 
-func (o *Output) addToType(item Item, id string, itemType string) {
-	// add based on the item type
-	switch t := itemType; t {
-	case "bugs":
-		o.Bugs[id] = item
-	case "fish":
-		o.Fish[id] = item
-	case "sea-creatures":
-		o.Sea[id] = item
-	}
-}
+func (o *Output) leaving(item Item, id string) {
 
-func (o *Output) addToLeaving(item Item, id string, itemType string) {
 	if item.Meta.Is.Northern.Leaving || item.Meta.Is.Southern.Leaving {
-		o.Leaving.All[id] = item
-	}
-	if item.Meta.Is.Northern.Leaving {
-		typedAdd(&o.Leaving.Northern, item, id, itemType)
-	}
-	if item.Meta.Is.Southern.Leaving {
-		typedAdd(&o.Leaving.Southern, item, id, itemType)
+		o.Leaving.Current[id] = item
+
+		if item.Meta.Is.Northern.Leaving {
+			o.Leaving.Northern.Current[id] = item
+			// add to leaving month
+			sequence := item.Attributes.Availability.Months.Northern.Sequences
+			lasts := util.NthOfSequences(sequence, -1)
+			for _, mth := range lasts {
+				month := time.Month(mth).String()
+				if o.Leaving.Northern.Months[month] == nil {
+					o.Leaving.Northern.Months[month] = make(map[string]Item)
+				}
+				o.Leaving.Northern.Months[month][id] = item
+			}
+		}
+		if item.Meta.Is.Southern.Leaving {
+			o.Leaving.Southern.Current[id] = item
+			// add to leaving month
+			sequence := item.Attributes.Availability.Months.Southern.Sequences
+			lasts := util.NthOfSequences(sequence, -1)
+			for _, mth := range lasts {
+				month := time.Month(mth).String()
+				if o.Leaving.Southern.Months[month] == nil {
+					o.Leaving.Southern.Months[month] = make(map[string]Item)
+				}
+				o.Leaving.Southern.Months[month][id] = item
+			}
+		}
+
 	}
 }
 
-func (o *Output) addToNew(item Item, id string, itemType string) {
+func (o *Output) new(item Item, id string) {
+
 	if item.Meta.Is.Northern.New || item.Meta.Is.Southern.New {
-		o.New.All[id] = item
-	}
+		o.New.Current[id] = item
 
-	if item.Meta.Is.Northern.New {
-		typedAdd(&o.New.Northern, item, id, itemType)
-	}
-	if item.Meta.Is.Southern.New {
-		typedAdd(&o.New.Southern, item, id, itemType)
+		if item.Meta.Is.Northern.New {
+			o.New.Northern.Current[id] = item
+			// add to new month
+			sequence := item.Attributes.Availability.Months.Northern.Sequences
+			lasts := util.NthOfSequences(sequence, -1)
+			for _, mth := range lasts {
+				month := time.Month(mth).String()
+				if o.New.Northern.Months[month] == nil {
+					o.New.Northern.Months[month] = make(map[string]Item)
+				}
+				o.New.Northern.Months[month][id] = item
+			}
+		}
+		if item.Meta.Is.Southern.New {
+			o.New.Southern.Current[id] = item
+			// add to new month
+			sequence := item.Attributes.Availability.Months.Southern.Sequences
+			lasts := util.NthOfSequences(sequence, -1)
+			for _, mth := range lasts {
+				month := time.Month(mth).String()
+				if o.New.Southern.Months[month] == nil {
+					o.New.Southern.Months[month] = make(map[string]Item)
+				}
+				o.New.Southern.Months[month][id] = item
+			}
+		}
+
 	}
 }
 
-func (o *Output) addToAvailable(item Item, id string, itemType string) {
-	if item.Meta.Is.Northern.Available || item.Meta.Is.Southern.Available {
-		o.Available.All[id] = item
-	}
+func (o *Output) available(item Item, id string) {
 
-	if item.Meta.Is.Northern.Available {
-		typedAdd(&o.Available.Northern, item, id, itemType)
-	}
-	if item.Meta.Is.Southern.Available {
-		typedAdd(&o.Available.Southern, item, id, itemType)
+	if item.Meta.Is.Northern.Available || item.Meta.Is.Southern.Available {
+		o.Available.Current[id] = item
+
+		o.adder(
+			item.Meta.Is.Northern.Available,
+			&o.Available.Northern,
+			item.Attributes.Availability.Months.Northern.Sequences,
+			item,
+			id,
+		)
+
+		o.adder(
+			item.Meta.Is.Southern.Available,
+			&o.Available.Southern,
+			item.Attributes.Availability.Months.Southern.Sequences,
+			item,
+			id,
+		)
+
 	}
 }
 
 func (o *Output) Add(item Item) {
 	id := item.ID
-	itemType := item.Attributes.Type.Slug
-
 	o.All[id] = item
-	o.addToType(item, id, itemType)
-	o.addToLeaving(item, id, itemType)
-	o.addToNew(item, id, itemType)
-	o.addToAvailable(item, id, itemType)
+
+	if item.Attributes.Type.Slug == "bugs" {
+		o.Bugs[id] = item
+	} else if item.Attributes.Type.Slug == "fish" {
+		o.Fish[id] = item
+	} else if item.Attributes.Type.Slug == "sea-creatures" {
+		o.Sea[id] = item
+	}
+
+	o.leaving(item, id)
+	o.new(item, id)
+	o.available(item, id)
 }

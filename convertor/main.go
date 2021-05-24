@@ -58,41 +58,41 @@ func Convert(fs afero.Fs, directory string, items []apistructures.Item) {
 	t := table.NewWriter()
 	t.SetOutputMirror(os.Stdout)
 	t.AppendHeader(table.Row{"Section", "", "", "Count"})
-	t.AppendRows([]table.Row{
-		{"Bugs", "", "", len(out.Bugs)},
-		{"Fish", "", "", len(out.Fish)},
-		{"Sea", "", "", len(out.Sea)},
+	// t.AppendRows([]table.Row{
+	// 	{"Bugs", "", "", len(out.Bugs)},
+	// 	{"Fish", "", "", len(out.Fish)},
+	// 	{"Sea", "", "", len(out.Sea)},
 
-		{"New", "", "", len(out.New.All)},
-		{"New", "North", "", len(out.New.Northern.All)},
-		{"New", "North", "Bugs", len(out.New.Northern.Bugs)},
-		{"New", "North", "Fish", len(out.New.Northern.Fish)},
-		{"New", "North", "Sea", len(out.New.Northern.Sea)},
-		{"New", "South", "", len(out.New.Southern.All)},
-		{"New", "South", "Bugs", len(out.New.Southern.Bugs)},
-		{"New", "South", "Fish", len(out.New.Southern.Fish)},
-		{"New", "South", "Sea", len(out.New.Southern.Sea)},
+	// 	{"New", "", "", len(out.New.All)},
+	// 	{"New", "North", "", len(out.New.Northern.All)},
+	// 	{"New", "North", "Bugs", len(out.New.Northern.Bugs)},
+	// 	{"New", "North", "Fish", len(out.New.Northern.Fish)},
+	// 	{"New", "North", "Sea", len(out.New.Northern.Sea)},
+	// 	{"New", "South", "", len(out.New.Southern.All)},
+	// 	{"New", "South", "Bugs", len(out.New.Southern.Bugs)},
+	// 	{"New", "South", "Fish", len(out.New.Southern.Fish)},
+	// 	{"New", "South", "Sea", len(out.New.Southern.Sea)},
 
-		{"Leaving", "", "", len(out.Leaving.All)},
-		{"Leaving", "North", "", len(out.Leaving.Northern.All)},
-		{"Leaving", "North", "Bugs", len(out.Leaving.Northern.Bugs)},
-		{"Leaving", "North", "Fish", len(out.Leaving.Northern.Fish)},
-		{"Leaving", "North", "Sea", len(out.Leaving.Northern.Sea)},
-		{"Leaving", "South", "", len(out.Leaving.Southern.All)},
-		{"Leaving", "South", "Bugs", len(out.Leaving.Southern.Bugs)},
-		{"Leaving", "South", "Fish", len(out.Leaving.Southern.Fish)},
-		{"Leaving", "South", "Sea", len(out.Leaving.Southern.Sea)},
+	// 	{"Leaving", "", "", len(out.Leaving.All)},
+	// 	{"Leaving", "North", "", len(out.Leaving.Northern.All)},
+	// 	{"Leaving", "North", "Bugs", len(out.Leaving.Northern.Bugs)},
+	// 	{"Leaving", "North", "Fish", len(out.Leaving.Northern.Fish)},
+	// 	{"Leaving", "North", "Sea", len(out.Leaving.Northern.Sea)},
+	// 	{"Leaving", "South", "", len(out.Leaving.Southern.All)},
+	// 	{"Leaving", "South", "Bugs", len(out.Leaving.Southern.Bugs)},
+	// 	{"Leaving", "South", "Fish", len(out.Leaving.Southern.Fish)},
+	// 	{"Leaving", "South", "Sea", len(out.Leaving.Southern.Sea)},
 
-		{"Available", "", "", len(out.Available.All)},
-		{"Available", "North", "", len(out.Available.Northern.All)},
-		{"Available", "North", "Bugs", len(out.Available.Northern.Bugs)},
-		{"Available", "North", "Fish", len(out.Available.Northern.Fish)},
-		{"Available", "North", "Sea", len(out.Available.Northern.Sea)},
-		{"Available", "South", "", len(out.Available.Southern.All)},
-		{"Available", "South", "Bugs", len(out.Available.Southern.Bugs)},
-		{"Available", "South", "Fish", len(out.Available.Southern.Fish)},
-		{"Available", "South", "Sea", len(out.Available.Southern.Sea)},
-	})
+	// 	{"Available", "", "", len(out.Available.All)},
+	// 	{"Available", "North", "", len(out.Available.Northern.All)},
+	// 	{"Available", "North", "Bugs", len(out.Available.Northern.Bugs)},
+	// 	{"Available", "North", "Fish", len(out.Available.Northern.Fish)},
+	// 	{"Available", "North", "Sea", len(out.Available.Northern.Sea)},
+	// 	{"Available", "South", "", len(out.Available.Southern.All)},
+	// 	{"Available", "South", "Bugs", len(out.Available.Southern.Bugs)},
+	// 	{"Available", "South", "Fish", len(out.Available.Southern.Fish)},
+	// 	{"Available", "South", "Sea", len(out.Available.Southern.Sea)},
+	// })
 
 	t.AppendSeparator()
 	t.AppendFooter(table.Row{"Total", "", "", len(out.All)})

@@ -2,6 +2,7 @@ package convertor
 
 import (
 	"convert/apistructures"
+	"convert/util"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -33,14 +34,14 @@ func Test_phrases(t *testing.T) {
 	simple := apistructures.Samples()["simple"][0]
 	actual := phrases(simple)
 	assert.Equal(t, simple.CatchPhrase, actual.Capture.Original, "Capture catchpharse should match")
-	assert.Equal(t, Safe(simple.CatchPhrase), actual.Capture.Safe, "Safe version should match safe result")
+	assert.Equal(t, util.Safe(simple.CatchPhrase), actual.Capture.Safe, "Safe version should match safe result")
 	assert.Equal(t, "Yes! Found it", actual.Capture.Safe, "Manual test for Safe")
 }
 
 func Test_images(t *testing.T) {
 	simple := apistructures.Samples()["simple"][0]
 	actual := images(simple)
-	thumb := ImagePath(simple.Type, "thumb", simple.FileName, "png")
+	thumb := util.ImagePath(simple.Type, "thumb", simple.FileName, "png")
 	assert.Equal(t, simple.IconURI, actual.Thumb.Direct, "Image paths should match")
 	assert.Equal(t, thumb, actual.Thumb.Local, "Image paths should look like local")
 	assert.Equal(t, "/fish/thumb/bitterling.png", actual.Thumb.Local, "Image paths should match what we think for local")

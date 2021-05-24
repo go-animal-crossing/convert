@@ -2,6 +2,7 @@ package convertor
 
 import (
 	"convert/targetstructures"
+	"convert/util"
 	"time"
 )
 
@@ -10,8 +11,8 @@ func IsNew(t time.Time, sequences [][]int, always bool) bool {
 		return false
 	}
 	month := int(t.Month())
-	ns := NthOfSequences(sequences, 0)
-	return Contains(ns, month)
+	ns := util.NthOfSequences(sequences, 0)
+	return util.Contains(ns, month)
 }
 
 func IsLeaving(t time.Time, sequences [][]int, always bool) bool {
@@ -19,8 +20,8 @@ func IsLeaving(t time.Time, sequences [][]int, always bool) bool {
 		return false
 	}
 	month := int(t.Month())
-	ns := NthOfSequences(sequences, -1)
-	return Contains(ns, month)
+	ns := util.NthOfSequences(sequences, -1)
+	return util.Contains(ns, month)
 }
 
 func IsAvailable(t time.Time, sequences []int, always bool) bool {
@@ -28,7 +29,7 @@ func IsAvailable(t time.Time, sequences []int, always bool) bool {
 		return true
 	}
 	month := int(t.Month())
-	return Contains(sequences, month)
+	return util.Contains(sequences, month)
 }
 
 func GenerateIs(t time.Time, item targetstructures.Item) targetstructures.Is {

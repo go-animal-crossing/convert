@@ -3,27 +3,32 @@ package targetstructures
 import "time"
 
 type Output struct {
-	Time      time.Time          `json:"time_generated"`
-	All       map[string]Item    `json:"all"`
-	Bugs      map[string]Item    `json:"bugs"`
-	Fish      map[string]Item    `json:"fish"`
-	Sea       map[string]Item    `json:"sea"`
-	Leaving   ItemTypeHemisphere `json:"leaving"`
-	New       ItemTypeHemisphere `json:"new"`
-	Available ItemTypeHemisphere `json:"available"`
+	Time      time.Time       `json:"time_generated"`
+	All       map[string]Item `json:"all"`
+	Bugs      map[string]Item `json:"bugs"`
+	Fish      map[string]Item `json:"fish"`
+	Sea       map[string]Item `json:"sea"`
+	Leaving   Listing         `json:"leaving"`
+	New       Listing         `json:"new"`
+	Available Listing         `json:"available"`
 }
 
-type ItemTypeHemisphere struct {
-	All      map[string]Item `json:"all"`
-	Northern TypedItems      `json:"northern"`
-	Southern TypedItems      `json:"southern"`
+type Listing struct {
+	Current  map[string]Item            `json:"current"`
+	Northern ListingByHemisphere        `json:"northern"`
+	Southern ListingByHemisphere        `json:"southern"`
+	Months   map[string]map[string]Item `json:"months"`
+	Bugs     map[string]Item            `json:"bugs"`
+	Fish     map[string]Item            `json:"fish"`
+	Sea      map[string]Item            `json:"sea"`
 }
 
-type TypedItems struct {
-	All  map[string]Item `json:"all"`
-	Bugs map[string]Item `json:"bugs"`
-	Fish map[string]Item `json:"fish"`
-	Sea  map[string]Item `json:"sea"`
+type ListingByHemisphere struct {
+	Current map[string]Item            `json:"current"`
+	Months  map[string]map[string]Item `json:"months"`
+	Bugs    map[string]Item            `json:"bugs"`
+	Fish    map[string]Item            `json:"fish"`
+	Sea     map[string]Item            `json:"sea"`
 }
 
 // Item is a target structure
