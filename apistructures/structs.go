@@ -14,7 +14,7 @@ type Item struct {
 	MuseumPhrase string       `json:"museum-phrase,omitempty"`
 	ImageURI     string       `json:"image_uri"`
 	IconURI      string       `json:"icon_uri"`
-	Type         string
+	Type         string       `json:"item_type"`
 }
 
 // SUB STRUCTS

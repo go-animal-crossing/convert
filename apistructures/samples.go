@@ -1,35 +1,32 @@
 package apistructures
 
-func Samples() map[string]Item {
-	simple := Item{
-		RawID:        1,
-		Shadow:       "Smallest (1)",
-		Price:        900,
-		PriceFlick:   1350,
-		CatchPhrase:  `Yes! Found "it"`,
-		MuseumPhrase: "Found it!",
-		ImageURI:     "http://g.com",
-		IconURI:      "https://g.co.uk",
-		Type:         "fish",
-		FileName:     `bitter"ling"`,
-		Names: Name{
-			EuEn: `bitter"ling"`,
-			UsEn: "Test",
-		},
-		Availability: Availability{
-			MonthNorthern:      "1-2,11-12",
-			MonthSouthern:      "6-7",
-			MonthArrayNorthern: []int{1, 2, 11, 12},
-			MonthArraySouthern: []int{6, 7},
-			Time:               "9-5",
-			TimeArray:          []int{9, 10, 11, 12, 13, 14, 15, 16, 17},
-			IsAllDay:           true,
-			IsAllYear:          false,
-			Location:           "River",
-			Rarity:             "Common",
-		},
+import (
+	"encoding/json"
+	"path"
+	"path/filepath"
+	"runtime"
+	"strings"
+
+	"github.com/spf13/afero"
+)
+
+func Samples() map[string][]Item {
+	samples := map[string][]Item{}
+	fs := afero.NewOsFs()
+
+	_, b, _, _ := runtime.Caller(0)
+	d := path.Join(path.Dir(b))
+	dir := d + "/_samples/*.json"
+
+	files, _ := afero.Glob(fs, dir)
+
+	for _, file := range files {
+		name := strings.ReplaceAll(filepath.Base(file), ".json", "")
+		content, _ := afero.ReadFile(fs, file)
+		loaded := make([]Item, 0)
+		json.Unmarshal(content, &loaded)
+		samples[name] = loaded
 	}
-	return map[string]Item{
-		"simple": simple,
-	}
+
+	return samples
 }
