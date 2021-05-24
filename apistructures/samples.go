@@ -6,13 +6,14 @@ func Samples() map[string]Item {
 		Shadow:       "Smallest (1)",
 		Price:        900,
 		PriceFlick:   1350,
-		CatchPhrase:  "Yes!",
+		CatchPhrase:  `Yes! Found "it"`,
 		MuseumPhrase: "Found it!",
 		ImageURI:     "http://g.com",
 		IconURI:      "https://g.co.uk",
 		Type:         "fish",
+		FileName:     `bitter"ling"`,
 		Names: Name{
-			EuEn: "bitterling",
+			EuEn: `bitter"ling"`,
 			UsEn: "Test",
 		},
 		Availability: Availability{

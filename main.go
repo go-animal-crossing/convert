@@ -1,7 +1,7 @@
 package main
 
 import (
-	"convert/convert"
+	"convert/convertor"
 	"convert/load"
 	"fmt"
 
@@ -18,6 +18,6 @@ func main() {
 	fmt.Printf("Starting conversion..\n")
 	fs := afero.NewOsFs()
 	items := load.Load(fs, directories["data"])
-	convert.Convert(fs, directories["converted"], items)
+	convertor.Convert(fs, directories["converted"], items)
 	fmt.Printf("Ending conversion..\n")
 }

@@ -90,7 +90,7 @@ type Images struct {
 	Main  Image `json:"main"`
 }
 
-// MonthHemisphere provides hemisphere specific data
+// Hemisphere provides hemisphere specific data
 type Hemisphere struct {
 	Always    bool    `json:"always"`
 	Text      string  `json:"text"`
