@@ -138,29 +138,44 @@
             "shadow": "",
             "speed": ""
         },
-        "meta": {
-            "time_generated": "2021-05-24T15:33:36.52483Z",
-            "has": {
-                "price": true,
-                "shadow": false,
-                "speed": false,
-                "rarity": true,
-                "location": true,
-                "availability": true
-            },
-            "is": {
-                "northern": {
-                    "new": false,
-                    "leaving": false,
-                    "available": false
-                },
-                "southern": {
-                    "new": false,
-                    "leaving": false,
-                    "available": true
-                }
-            }
+        "has": {
+            "price": true,
+            "shadow": false,
+            "speed": false,
+            "rarity": true,
+            "location": true,
+            "availability": true
         },
+        "tags": [
+            "type-bugs",
+            "available-always",
+            "available-northern-always",
+            "available-southern-always",
+            "available-northern-january",
+            "available-southern-january",
+            "available-northern-february",
+            "available-southern-february",
+            "available-northern-march",
+            "available-southern-march",
+            "available-northern-april",
+            "available-southern-april",
+            "available-northern-may",
+            "available-southern-may",
+            "available-northern-june",
+            "available-southern-june",
+            "available-southern-july",
+            "available-northern-july",
+            "available-northern-august",
+            "available-southern-august",
+            "available-northern-september",
+            "available-southern-september",
+            "available-northern-october",
+            "available-southern-october",
+            "available-northern-november",
+            "available-southern-november",
+            "available-northern-december",
+            "available-southern-december"
+        ],
         "converted": true
     }
 ]

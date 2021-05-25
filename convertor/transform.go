@@ -4,6 +4,8 @@ import (
 	"convert/apistructures"
 	"convert/targetstructures"
 	"convert/util"
+	"fmt"
+	"strings"
 	"time"
 )
 
@@ -96,13 +98,12 @@ func availability(item apistructures.Item) targetstructures.Availability {
 	}
 }
 
-func meta(item apistructures.Item) targetstructures.Meta {
-	t := time.Now().UTC()
+func has(item apistructures.Item) targetstructures.Has {
 
 	available := ((len(item.Availability.MonthArrayNorthern) > 0) ||
 		(len(item.Availability.MonthArraySouthern) > 0))
 
-	has := targetstructures.Has{
+	return targetstructures.Has{
 		Price:        (item.Price > 0),
 		Shadow:       (len(item.Shadow) > 0),
 		Speed:        (len(item.Speed) > 0),
@@ -111,10 +112,6 @@ func meta(item apistructures.Item) targetstructures.Meta {
 		Availability: available,
 	}
 
-	return targetstructures.Meta{
-		Time: t,
-		Has:  has,
-	}
 }
 
 func attributes(item apistructures.Item) targetstructures.Attributes {
@@ -130,14 +127,46 @@ func attributes(item apistructures.Item) targetstructures.Attributes {
 		Availability: availability(item),
 	}
 }
+
+func Tags(item targetstructures.Item) []string {
+	tags := []string{fmt.Sprintf("type_%s", item.Attributes.Type.Slug)}
+
+	if item.Attributes.Availability.Months.Always {
+		tags = append(tags, "available_always")
+	}
+	if item.Attributes.Availability.Months.Northern.Always {
+		tags = append(tags, "available_northern_always")
+	}
+	if item.Attributes.Availability.Months.Southern.Always {
+		tags = append(tags, "available_southern_always")
+	}
+	// get the Is data per month and generate tags for each
+	for m := 1; m <= 12; m++ {
+		month := time.Date(2021, time.Month(m), 1, 1, 0, 0, 0, time.UTC)
+		is := GenerateIs(month, item)
+		for hemiName, hemiData := range is {
+			for prop, val := range hemiData {
+				m := month.Month().String()
+				tag := fmt.Sprintf("%s_%s", prop, m)
+				htag := fmt.Sprintf("%s_%s_%s", prop, hemiName, m)
+				if val {
+					tags = append(tags, strings.ToLower(htag), strings.ToLower(tag))
+				}
+			}
+		}
+	}
+
+	return tags
+}
+
 func Transform(item apistructures.Item) targetstructures.Item {
 	target := targetstructures.Item{
 		ID:         item.ID(),
 		Attributes: attributes(item),
-		Meta:       meta(item),
+		Has:        has(item),
 		Converted:  true,
 	}
-	target.Meta.Is = GenerateIs(target.Meta.Time, target)
+	target.Tags = Tags(target)
 
 	return target
 

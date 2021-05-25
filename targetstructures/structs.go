@@ -3,39 +3,16 @@ package targetstructures
 import "time"
 
 type Output struct {
-	Time      time.Time       `json:"time_generated"`
-	All       map[string]Item `json:"all"`
-	Bugs      map[string]Item `json:"bugs"`
-	Fish      map[string]Item `json:"fish"`
-	Sea       map[string]Item `json:"sea"`
-	Leaving   Listing         `json:"leaving"`
-	New       Listing         `json:"new"`
-	Available Listing         `json:"available"`
-}
-
-type Listing struct {
-	Current  map[string]Item            `json:"current"`
-	Northern ListingByHemisphere        `json:"northern"`
-	Southern ListingByHemisphere        `json:"southern"`
-	Months   map[string]map[string]Item `json:"months"`
-	Bugs     map[string]Item            `json:"bugs"`
-	Fish     map[string]Item            `json:"fish"`
-	Sea      map[string]Item            `json:"sea"`
-}
-
-type ListingByHemisphere struct {
-	Current map[string]Item            `json:"current"`
-	Months  map[string]map[string]Item `json:"months"`
-	Bugs    map[string]Item            `json:"bugs"`
-	Fish    map[string]Item            `json:"fish"`
-	Sea     map[string]Item            `json:"sea"`
+	Time time.Time       `json:"time_generated"`
+	All  map[string]Item `json:"all"`
 }
 
 // Item is a target structure
 type Item struct {
 	ID         string     `json:"id"`
 	Attributes Attributes `json:"attributes"`
-	Meta       Meta       `json:"meta"`
+	Has        Has        `json:"has"`
+	Tags       []string   `json:"tags"`
 	Converted  bool       `json:"converted"`
 }
 
@@ -46,23 +23,6 @@ type Has struct {
 	Rarity       bool `json:"rarity"`
 	Location     bool `json:"location"`
 	Availability bool `json:"availability"`
-}
-
-type IsHemisphere struct {
-	New       bool `json:"new"`
-	Leaving   bool `json:"leaving"`
-	Available bool `json:"available"`
-}
-
-type Is struct {
-	Northern IsHemisphere `json:"northern"`
-	Southern IsHemisphere `json:"southern"`
-}
-
-type Meta struct {
-	Time time.Time `json:"time_generated"`
-	Has  Has       `json:"has"`
-	Is   Is        `json:"is"`
 }
 
 type Attributes struct {

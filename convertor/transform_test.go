@@ -3,6 +3,7 @@ package convertor
 import (
 	"convert/apistructures"
 	"convert/util"
+	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -75,11 +76,32 @@ func Test_availability(t *testing.T) {
 
 func Test_has(t *testing.T) {
 	simple := apistructures.Samples()["simple"][0]
-	actual := meta(simple)
+	actual := has(simple)
 	// test has
-	assert.True(t, actual.Has.Location)
-	assert.True(t, actual.Has.Rarity)
-	assert.True(t, actual.Has.Price)
-	assert.True(t, actual.Has.Shadow)
-	assert.False(t, actual.Has.Speed)
+	assert.True(t, actual.Location)
+	assert.True(t, actual.Rarity)
+	assert.True(t, actual.Price)
+	assert.True(t, actual.Shadow)
+	assert.False(t, actual.Speed)
+}
+
+func Test_tags_simple(t *testing.T) {
+	simple := apistructures.Samples()["simple"][0]
+	trans := Transform(simple)
+	tags := Tags(trans)
+
+	fmt.Printf("%v\n", tags)
+	assert.Contains(t, tags, "type_fish")
+	assert.NotContains(t, tags, "type_bugs")
+
+	assert.Contains(t, tags, "leaving_january")
+	assert.Contains(t, tags, "leaving_northern_january")
+	assert.NotContains(t, tags, "leaving_southern_january")
+
+	assert.Contains(t, tags, "available_may")
+	assert.Contains(t, tags, "available_southern_may")
+
+	assert.NotContains(t, tags, "available_february")
+	assert.NotContains(t, tags, "available_northern_february")
+
 }

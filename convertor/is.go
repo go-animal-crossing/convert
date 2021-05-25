@@ -32,18 +32,21 @@ func IsAvailable(t time.Time, sequences []int, always bool) bool {
 	return util.Contains(sequences, month)
 }
 
-func GenerateIs(t time.Time, item targetstructures.Item) targetstructures.Is {
+func GenerateIs(t time.Time, item targetstructures.Item) map[string]map[string]bool {
 	n := item.Attributes.Availability.Months.Northern
-	north := targetstructures.IsHemisphere{
-		New:       IsNew(t, n.Sequences, n.Always),
-		Leaving:   IsLeaving(t, n.Sequences, n.Always),
-		Available: IsAvailable(t, n.Array, n.Always),
-	}
 	s := item.Attributes.Availability.Months.Southern
-	south := targetstructures.IsHemisphere{
-		New:       IsNew(t, s.Sequences, s.Always),
-		Leaving:   IsLeaving(t, s.Sequences, s.Always),
-		Available: IsAvailable(t, s.Array, s.Always),
-	}
-	return targetstructures.Is{Northern: north, Southern: south}
+
+	is := make(map[string]map[string]bool)
+
+	is["northern"] = make(map[string]bool)
+	is["northern"]["new"] = IsNew(t, n.Sequences, n.Always)
+	is["northern"]["leaving"] = IsLeaving(t, n.Sequences, n.Always)
+	is["northern"]["available"] = IsAvailable(t, n.Array, n.Always)
+
+	is["southern"] = make(map[string]bool)
+	is["southern"]["new"] = IsNew(t, s.Sequences, s.Always)
+	is["southern"]["leaving"] = IsLeaving(t, s.Sequences, s.Always)
+	is["southern"]["available"] = IsAvailable(t, s.Array, s.Always)
+
+	return is
 }

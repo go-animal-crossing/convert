@@ -138,29 +138,44 @@
             "shadow": "",
             "speed": ""
         },
-        "meta": {
-            "time_generated": "2021-05-24T15:33:36.52483Z",
-            "has": {
-                "price": true,
-                "shadow": false,
-                "speed": false,
-                "rarity": true,
-                "location": true,
-                "availability": true
-            },
-            "is": {
-                "northern": {
-                    "new": false,
-                    "leaving": false,
-                    "available": false
-                },
-                "southern": {
-                    "new": false,
-                    "leaving": false,
-                    "available": true
-                }
-            }
+        "has": {
+            "price": true,
+            "shadow": false,
+            "speed": false,
+            "rarity": true,
+            "location": true,
+            "availability": true
         },
+        "tags": [
+            "type-bugs",
+            "available-always",
+            "available-northern-always",
+            "available-southern-always",
+            "available-northern-january",
+            "available-southern-january",
+            "available-northern-february",
+            "available-southern-february",
+            "available-northern-march",
+            "available-southern-march",
+            "available-northern-april",
+            "available-southern-april",
+            "available-northern-may",
+            "available-southern-may",
+            "available-northern-june",
+            "available-southern-june",
+            "available-southern-july",
+            "available-northern-july",
+            "available-northern-august",
+            "available-southern-august",
+            "available-northern-september",
+            "available-southern-september",
+            "available-northern-october",
+            "available-southern-october",
+            "available-northern-november",
+            "available-southern-november",
+            "available-northern-december",
+            "available-southern-december"
+        ],
         "converted": true
     },
     {
@@ -274,29 +289,29 @@
             "shadow": "Largest (6)",
             "speed": ""
         },
-        "meta": {
-            "time_generated": "2021-05-24T15:33:36.538393Z",
-            "has": {
-                "price": true,
-                "shadow": true,
-                "speed": false,
-                "rarity": true,
-                "location": true,
-                "availability": true
-            },
-            "is": {
-                "northern": {
-                    "new": false,
-                    "leaving": false,
-                    "available": false
-                },
-                "southern": {
-                    "new": false,
-                    "leaving": false,
-                    "available": false
-                }
-            }
+        "has": {
+            "price": true,
+            "shadow": true,
+            "speed": false,
+            "rarity": true,
+            "location": true,
+            "availability": true
         },
+        "tags": [
+            "type-fish",
+            "available-southern-january",
+            "available-southern-february",
+            "leaving-southern-march",
+            "available-southern-march",
+            "new-northern-june",
+            "available-northern-june",
+            "available-northern-july",
+            "available-northern-august",
+            "leaving-northern-september",
+            "available-northern-september",
+            "available-southern-december",
+            "new-southern-december"
+        ],
         "converted": true
     },
     {
@@ -421,29 +436,31 @@
             "shadow": "Smallest (1)",
             "speed": ""
         },
-        "meta": {
-            "time_generated": "2021-05-24T15:33:36.525119Z",
-            "has": {
-                "price": true,
-                "shadow": true,
-                "speed": false,
-                "rarity": true,
-                "location": true,
-                "availability": true
-            },
-            "is": {
-                "northern": {
-                    "new": false,
-                    "leaving": false,
-                    "available": false
-                },
-                "southern": {
-                    "new": true,
-                    "leaving": false,
-                    "available": true
-                }
-            }
+        "has": {
+            "price": true,
+            "shadow": true,
+            "speed": false,
+            "rarity": true,
+            "location": true,
+            "availability": true
         },
+        "tags": [
+            "type-fish",
+            "available-northern-january",
+            "available-northern-february",
+            "leaving-northern-march",
+            "available-northern-march",
+            "new-southern-may",
+            "available-southern-may",
+            "available-southern-june",
+            "available-southern-july",
+            "available-southern-august",
+            "leaving-southern-september",
+            "available-southern-september",
+            "available-northern-november",
+            "new-northern-november",
+            "available-northern-december"
+        ],
         "converted": true
     },
     {
@@ -555,29 +572,33 @@
             "shadow": "Smallest (1)",
             "speed": ""
         },
-        "meta": {
-            "time_generated": "2021-05-24T15:33:36.532286Z",
-            "has": {
-                "price": true,
-                "shadow": true,
-                "speed": false,
-                "rarity": true,
-                "location": true,
-                "availability": true
-            },
-            "is": {
-                "northern": {
-                    "new": true,
-                    "leaving": false,
-                    "available": true
-                },
-                "southern": {
-                    "new": false,
-                    "leaving": false,
-                    "available": false
-                }
-            }
+        "has": {
+            "price": true,
+            "shadow": true,
+            "speed": false,
+            "rarity": true,
+            "location": true,
+            "availability": true
         },
+        "tags": [
+            "type-fish",
+            "available-southern-january",
+            "available-southern-february",
+            "available-southern-march",
+            "leaving-southern-april",
+            "available-southern-april",
+            "new-northern-may",
+            "available-northern-may",
+            "available-northern-june",
+            "available-northern-july",
+            "available-northern-august",
+            "available-northern-september",
+            "leaving-northern-october",
+            "available-northern-october",
+            "available-southern-november",
+            "new-southern-november",
+            "available-southern-december"
+        ],
         "converted": true
     },
     {
@@ -707,29 +728,39 @@
             "shadow": "Medium (3)",
             "speed": ""
         },
-        "meta": {
-            "time_generated": "2021-05-25T07:10:02.30096Z",
-            "has": {
-                "price": true,
-                "shadow": true,
-                "speed": false,
-                "rarity": true,
-                "location": true,
-                "availability": true
-            },
-            "is": {
-                "northern": {
-                    "new": false,
-                    "leaving": false,
-                    "available": true
-                },
-                "southern": {
-                    "new": false,
-                    "leaving": true,
-                    "available": true
-                }
-            }
+        "has": {
+            "price": true,
+            "shadow": true,
+            "speed": false,
+            "rarity": true,
+            "location": true,
+            "availability": true
         },
+        "tags": [
+            "type-fish",
+            "new-northern-march",
+            "available-northern-march",
+            "new-southern-march",
+            "available-southern-march",
+            "available-northern-april",
+            "available-southern-april",
+            "leaving-southern-may",
+            "available-southern-may",
+            "available-northern-may",
+            "leaving-northern-june",
+            "available-northern-june",
+            "new-northern-september",
+            "available-northern-september",
+            "new-southern-september",
+            "available-southern-september",
+            "available-northern-october",
+            "available-southern-october",
+            "leaving-northern-november",
+            "available-northern-november",
+            "available-southern-november",
+            "available-southern-december",
+            "leaving-southern-december"
+        ],
         "converted": true
     }
 ]
