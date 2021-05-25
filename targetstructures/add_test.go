@@ -1,33 +1,30 @@
 package targetstructures
 
 import (
+	"convert/util"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func Test_Add_simple(t *testing.T) {
 	r := New()
 	// simple is a bug and available all the time
 	simple := Samples()["simple"][0]
-	//simple.Tags = convertor.Tags(simple)
-
 	r.Add(simple)
 
-	// fmt.Printf("%v", r.All["00cb41a2dcac815286129ab947d02a3f2a4b79ce"].Tags)
-	// assert.Equal(t, 1, len(r.All))
-	// assert.Equal(t, 1, len(r.Bugs))
-	// assert.Equal(t, 0, len(r.Fish))
-	// assert.Equal(t, 0, len(r.Sea))
+	assert.Equal(t, 1, len(r.All))
 
-	// assert.Equal(t, 0, len(r.Leaving.Northern.Current))
+	// get all tags
+	tags := []string{}
+	for _, i := range r.All {
+		tags = append(tags, i.Tags...)
+	}
 
-	// assert.Equal(t, 0, len(r.Leaving.Southern.Current))
-	// assert.Equal(t, 0, len(r.New.Northern.Current))
-	// assert.Equal(t, 0, len(r.New.Southern.Current))
-	// assert.Equal(t, 0, len(r.Available.Northern.Current))
-	// assert.Equal(t, 1, len(r.Available.Southern.Current))
-
-	// assert.Equal(t, 1, len(r.Available.Bugs))
-	// assert.Equal(t, 1, len(r.Available.Months["May"]))
+	assert.Contains(t, tags, "type_bugs")
+	assert.NotContains(t, tags, "type_fish")
+	assert.NotContains(t, tags, "type_sea_creatures")
+	assert.NotContains(t, tags, "leaving_northern_may")
 
 }
 
@@ -38,22 +35,59 @@ func Test_Add_multi(t *testing.T) {
 	for _, i := range multi {
 		r.Add(i)
 	}
+	assert.Equal(t, 5, len(r.All))
 
-	// assert.Equal(t, 5, len(r.All))
-	// assert.Equal(t, 1, len(r.Bugs))
-	// assert.Equal(t, 4, len(r.Fish))
+	// get all tags
+	tags := []string{}
+	for _, i := range r.All {
+		tags = append(tags, i.Tags...)
+	}
+	//fmt.Printf("%v\n", tags)
 
-	// assert.Equal(t, 0, len(r.Leaving.Northern.Current))
-	// assert.Equal(t, 1, len(r.Leaving.Southern.Current))
+	assert.Contains(t, tags, "type_bugs")
+	count := util.Count(tags, "type_bugs")
+	assert.Equal(t, 1, count)
 
-	// assert.Equal(t, 1, len(r.New.Northern.Current))
-	// assert.Equal(t, 0, len(r.New.Northern.Bugs))
+	assert.Contains(t, tags, "type_fish")
+	count = util.Count(tags, "type_fish")
+	assert.Equal(t, 4, count)
 
-	// assert.Equal(t, 1, len(r.New.Southern.Current))
-	// assert.Equal(t, 1, len(r.New.Southern.Fish))
-	// //
-	// assert.Equal(t, 1, len(r.Leaving.Southern.Months["December"]))
-	// assert.Equal(t, 1, len(r.Leaving.Months["December"]))
+	assert.NotContains(t, tags, "type_sea_creatures")
+	assert.NotContains(t, tags, "leaving_may_northern")
 
-	// assert.Equal(t, 1, len(r.Leaving.Southern.Fish))
+	assert.Contains(t, tags, "leaving_may_southern")
+	count = util.Count(tags, "leaving_may_southern")
+	assert.Equal(t, 1, count)
+
+	assert.Contains(t, tags, "new_may")
+	assert.Contains(t, tags, "new_may_northern")
+	count = util.Count(tags, "new_may_northern")
+	assert.Equal(t, 1, count)
+
+	// 2 new fish in may - bitterfish in south, rainbow in north
+	assert.Contains(t, tags, "type_fish_new_may")
+	count = util.Count(tags, "type_fish_new_may")
+	assert.Equal(t, 2, count)
+
+	// just one new fish in south for may - bitterling
+	assert.Contains(t, tags, "type_fish_new_may_southern")
+	count = util.Count(tags, "type_fish_new_may_southern")
+	assert.Equal(t, 1, count)
+
+	// rainbow fish
+	assert.Contains(t, tags, "type_fish_new_may_northern")
+	count = util.Count(tags, "type_fish_new_may_northern")
+	assert.Equal(t, 1, count)
+
+	assert.Contains(t, tags, "leaving_december_southern")
+	count = util.Count(tags, "leaving_december_southern")
+	assert.Equal(t, 1, count)
+
+	assert.Contains(t, tags, "leaving_december")
+	count = util.Count(tags, "leaving_december")
+	assert.Equal(t, 1, count)
+
+	assert.Contains(t, tags, "type_fish_leaving_december_southern")
+	count = util.Count(tags, "type_fish_leaving_december_southern")
+	assert.Equal(t, 1, count)
 }
