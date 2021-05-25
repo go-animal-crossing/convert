@@ -3,7 +3,6 @@ package convertor
 import (
 	"convert/apistructures"
 	"convert/util"
-	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -90,18 +89,18 @@ func Test_tags_simple(t *testing.T) {
 	trans := Transform(simple)
 	tags := Tags(trans)
 
-	fmt.Printf("%v\n", tags)
 	assert.Contains(t, tags, "type_fish")
 	assert.NotContains(t, tags, "type_bugs")
 
 	assert.Contains(t, tags, "leaving_january")
-	assert.Contains(t, tags, "leaving_northern_january")
-	assert.NotContains(t, tags, "leaving_southern_january")
+	assert.Contains(t, tags, "leaving_january_northern")
+	assert.Contains(t, tags, "type_fish_leaving_january_northern")
+	assert.NotContains(t, tags, "leaving_january_southern")
 
 	assert.Contains(t, tags, "available_may")
-	assert.Contains(t, tags, "available_southern_may")
+	assert.Contains(t, tags, "available_may_southern")
 
 	assert.NotContains(t, tags, "available_february")
-	assert.NotContains(t, tags, "available_northern_february")
+	assert.NotContains(t, tags, "available_february_northern")
 
 }

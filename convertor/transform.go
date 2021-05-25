@@ -129,31 +129,41 @@ func attributes(item apistructures.Item) targetstructures.Attributes {
 }
 
 func Tags(item targetstructures.Item) []string {
-	tags := []string{fmt.Sprintf("type_%s", item.Attributes.Type.Slug)}
+	// -- tags:
+	//fish
+	//fish_new -- generated from tag - fish_new_$month
+	//fish_new_april
+	//fish_new_april_northern
+	//fish_new_northern -- generated from tag - fish_new_$month_$hemi
 
-	if item.Attributes.Availability.Months.Always {
-		tags = append(tags, "available_always")
-	}
-	if item.Attributes.Availability.Months.Northern.Always {
-		tags = append(tags, "available_northern_always")
-	}
-	if item.Attributes.Availability.Months.Southern.Always {
-		tags = append(tags, "available_southern_always")
-	}
+	//new -- generated from tag new_$month
+	//new_april
+	//new_april_northern
+	//new_northern
+	ty := strings.ReplaceAll(item.Attributes.Type.Slug, "-", "")
+	tags := []string{fmt.Sprintf("type_%s", ty)}
+
 	// get the Is data per month and generate tags for each
 	for m := 1; m <= 12; m++ {
-		month := time.Date(2021, time.Month(m), 1, 1, 0, 0, 0, time.UTC)
-		is := GenerateIs(month, item)
-		for hemiName, hemiData := range is {
-			for prop, val := range hemiData {
-				m := month.Month().String()
-				tag := fmt.Sprintf("%s_%s", prop, m)
-				htag := fmt.Sprintf("%s_%s_%s", prop, hemiName, m)
+		isMonth := time.Date(2021, time.Month(m), 1, 1, 0, 0, 0, time.UTC)
+		month := strings.ToLower(isMonth.Month().String())
+		is := GenerateIs(isMonth, item)
+
+		for status, data := range is {
+
+			for hemi, val := range data {
+
 				if val {
-					tags = append(tags, strings.ToLower(htag), strings.ToLower(tag))
+					status_month := fmt.Sprintf("%s_%s", status, month)
+					status_month_hemi := fmt.Sprintf("%s_%s_%s", status, month, hemi)
+					type_status_month := fmt.Sprintf("type_%s_%s_%s", ty, status, month)
+					type_status_month_hemi := fmt.Sprintf("type_%s_%s_%s_%s", ty, status, month, hemi)
+					tags = append(tags, status_month, status_month_hemi, type_status_month, type_status_month_hemi)
 				}
 			}
+
 		}
+
 	}
 
 	return tags
