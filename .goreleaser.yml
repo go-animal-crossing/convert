@@ -13,9 +13,6 @@ builds:
     id: convert
     main: ./main.go
     goos:
-      - freebsd
-      - openbsd
-      - solaris
       - linux
       - darwin
     goarch:
