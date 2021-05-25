@@ -15,6 +15,25 @@ func Contains(flat []int, val int) bool {
 	return false
 }
 
+func ContainsS(flat []string, val string) bool {
+	for _, m := range flat {
+		if m == val {
+			return true
+		}
+	}
+	return false
+}
+
+func Count(flat []string, compare string) int {
+	count := 0
+	for _, t := range flat {
+		if t == compare {
+			count = count + 1
+		}
+	}
+	return count
+}
+
 func Safe(str string) string {
 	str = strings.ReplaceAll(str, "'", "")
 	str = strings.ReplaceAll(str, "\"", "")
