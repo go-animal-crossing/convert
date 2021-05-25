@@ -21,12 +21,6 @@ jobs:
         DEFAULT_BUMP: patch
         RELEASE_BRANCHES: main
         WITH_V: true
-    - name: Create latest tag
-      run: |
-        git config --global user.email "runner@go-animal-crossing.com"
-        git config --global user.name "Github Action"      
-        git tag -fa "latest" -m "latest"
-        git push origin latest --force
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
@@ -43,3 +37,9 @@ jobs:
         args: release
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Create latest tag
+      run: |
+        git config --global user.email "runner@go-animal-crossing.com"
+        git config --global user.name "Github Action"      
+        git tag -fa "latest" -m "latest"
+        git push origin latest --force
