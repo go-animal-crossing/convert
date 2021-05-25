@@ -1,41 +1,45 @@
 package targetstructures
 
-import (
-	"convert/util"
-	"time"
-)
+import "convert/util"
+
+func (o *Output) addForListAndHemispheres(
+	list *Listing,
+	north *ListingByHemisphere,
+	south *ListingByHemisphere,
+	nIs bool,
+	sIs bool,
+	nNths []int,
+	sNths []int,
+	item Item,
+	id string,
+) {
+	o.addForListing(list, nNths, sNths, item, id)
+	o.addForHemisphere(nIs, north, nNths, item, id)
+	o.addForHemisphere(sIs, south, sNths, item, id)
+
+}
 
 func (o *Output) leaving(item Item, id string) {
 
 	if item.Meta.Is.Northern.Leaving || item.Meta.Is.Southern.Leaving {
 		o.Leaving.Current[id] = item
+		n := item.Attributes.Availability.Months.Northern.Sequences
+		nNths := util.NthOfSequences(n, -1)
 
-		if item.Meta.Is.Northern.Leaving {
-			o.Leaving.Northern.Current[id] = item
-			// add to leaving month
-			sequence := item.Attributes.Availability.Months.Northern.Sequences
-			lasts := util.NthOfSequences(sequence, -1)
-			for _, mth := range lasts {
-				month := time.Month(mth).String()
-				if o.Leaving.Northern.Months[month] == nil {
-					o.Leaving.Northern.Months[month] = make(map[string]Item)
-				}
-				o.Leaving.Northern.Months[month][id] = item
-			}
-		}
-		if item.Meta.Is.Southern.Leaving {
-			o.Leaving.Southern.Current[id] = item
-			// add to leaving month
-			sequence := item.Attributes.Availability.Months.Southern.Sequences
-			lasts := util.NthOfSequences(sequence, -1)
-			for _, mth := range lasts {
-				month := time.Month(mth).String()
-				if o.Leaving.Southern.Months[month] == nil {
-					o.Leaving.Southern.Months[month] = make(map[string]Item)
-				}
-				o.Leaving.Southern.Months[month][id] = item
-			}
-		}
+		s := item.Attributes.Availability.Months.Southern.Sequences
+		sNths := util.NthOfSequences(s, -1)
+
+		o.addForListAndHemispheres(
+			&o.Leaving,
+			&o.Leaving.Northern,
+			&o.Leaving.Southern,
+			item.Meta.Is.Northern.Leaving,
+			item.Meta.Is.Southern.Leaving,
+			nNths,
+			sNths,
+			item,
+			id,
+		)
 
 	}
 }
@@ -44,33 +48,22 @@ func (o *Output) new(item Item, id string) {
 
 	if item.Meta.Is.Northern.New || item.Meta.Is.Southern.New {
 		o.New.Current[id] = item
+		n := item.Attributes.Availability.Months.Northern.Sequences
+		nNths := util.NthOfSequences(n, -0)
+		s := item.Attributes.Availability.Months.Southern.Sequences
+		sNths := util.NthOfSequences(s, -0)
 
-		if item.Meta.Is.Northern.New {
-			o.New.Northern.Current[id] = item
-			// add to new month
-			sequence := item.Attributes.Availability.Months.Northern.Sequences
-			lasts := util.NthOfSequences(sequence, -1)
-			for _, mth := range lasts {
-				month := time.Month(mth).String()
-				if o.New.Northern.Months[month] == nil {
-					o.New.Northern.Months[month] = make(map[string]Item)
-				}
-				o.New.Northern.Months[month][id] = item
-			}
-		}
-		if item.Meta.Is.Southern.New {
-			o.New.Southern.Current[id] = item
-			// add to new month
-			sequence := item.Attributes.Availability.Months.Southern.Sequences
-			lasts := util.NthOfSequences(sequence, -1)
-			for _, mth := range lasts {
-				month := time.Month(mth).String()
-				if o.New.Southern.Months[month] == nil {
-					o.New.Southern.Months[month] = make(map[string]Item)
-				}
-				o.New.Southern.Months[month][id] = item
-			}
-		}
+		o.addForListAndHemispheres(
+			&o.New,
+			&o.New.Northern,
+			&o.New.Southern,
+			item.Meta.Is.Northern.New,
+			item.Meta.Is.Southern.New,
+			nNths,
+			sNths,
+			item,
+			id,
+		)
 
 	}
 }
@@ -79,19 +72,17 @@ func (o *Output) available(item Item, id string) {
 
 	if item.Meta.Is.Northern.Available || item.Meta.Is.Southern.Available {
 		o.Available.Current[id] = item
+		n := item.Attributes.Availability.Months.Northern.Array
+		s := item.Attributes.Availability.Months.Southern.Array
 
-		o.adder(
-			item.Meta.Is.Northern.Available,
+		o.addForListAndHemispheres(
+			&o.Available,
 			&o.Available.Northern,
-			item.Attributes.Availability.Months.Northern.Sequences,
-			item,
-			id,
-		)
-
-		o.adder(
-			item.Meta.Is.Southern.Available,
 			&o.Available.Southern,
-			item.Attributes.Availability.Months.Southern.Sequences,
+			item.Meta.Is.Northern.Available,
+			item.Meta.Is.Southern.Available,
+			n,
+			s,
 			item,
 			id,
 		)

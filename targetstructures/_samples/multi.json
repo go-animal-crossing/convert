@@ -579,5 +579,157 @@
             }
         },
         "converted": true
+    },
+    {
+        "id": "5ae4004a460b0222d4b04395dbeb701e4ecf30fb",
+        "attributes": {
+            "titles": {
+                "original": "char",
+                "safe": "Char"
+            },
+            "uris": {
+                "url": "/fish/char",
+                "slug": "char"
+            },
+            "type": {
+                "title": "Fish",
+                "slug": "fish"
+            },
+            "prices": {
+                "store": 3800,
+                "cj": 5700,
+                "flick": 0
+            },
+            "phrases": {
+                "capture": {
+                    "original": "I caught a char! Now I'm gonna sit on it!",
+                    "safe": "I caught a char! Now Im gonna sit on it!"
+                },
+                "museum": {
+                    "original": "The char is one of the bigger first around the world, and, in the world of fish, that's quite an accomplishment! They are territorial predators, and therefore must constantly defend their 'turf' from others. So when you see a large char like this one, it is likely a skilled fighter and veteran of many battles. My feathers! I hope it never has cause to go into battle with me!",
+                    "safe": "The char is one of the bigger first around the world, and, in the world of fish, thats quite an accomplishment! They are territorial predators, and therefore must constantly defend their turf from others. So when you see a large char like this one, it is likely a skilled fighter and veteran of many battles. My feathers! I hope it never has cause to go into battle with me!"
+                }
+            },
+            "images": {
+                "thumb": {
+                    "direct": "https://acnhapi.com/v1/icons/fish/28",
+                    "local": "/fish/thumb/char.png"
+                },
+                "main": {
+                    "direct": "https://acnhapi.com/v1/images/fish/28",
+                    "local": "/fish/main/char.png"
+                }
+            },
+            "availability": {
+                "location": "River (Clifftop) & Pond",
+                "rarity": "Uncommon",
+                "months": {
+                    "always": false,
+                    "northern": {
+                        "always": false,
+                        "text": "March - June, September - November",
+                        "ranges": "3-6 & 9-11",
+                        "array": [
+                            3,
+                            4,
+                            5,
+                            6,
+                            9,
+                            10,
+                            11
+                        ],
+                        "sequences": [
+                            [
+                                3,
+                                4,
+                                5,
+                                6
+                            ],
+                            [
+                                9,
+                                10,
+                                11
+                            ]
+                        ]
+                    },
+                    "southern": {
+                        "always": false,
+                        "text": "March - May, September - December",
+                        "ranges": "3-5 & 9-12",
+                        "array": [
+                            3,
+                            4,
+                            5,
+                            9,
+                            10,
+                            11,
+                            12
+                        ],
+                        "sequences": [
+                            [
+                                3,
+                                4,
+                                5
+                            ],
+                            [
+                                9,
+                                10,
+                                11,
+                                12
+                            ]
+                        ]
+                    }
+                },
+                "times": {
+                    "always": false,
+                    "text": "4pm - 9am",
+                    "array": [
+                        16,
+                        17,
+                        18,
+                        19,
+                        20,
+                        21,
+                        22,
+                        23,
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8
+                    ]
+                }
+            },
+            "shadow": "Medium (3)",
+            "speed": ""
+        },
+        "meta": {
+            "time_generated": "2021-05-25T07:10:02.30096Z",
+            "has": {
+                "price": true,
+                "shadow": true,
+                "speed": false,
+                "rarity": true,
+                "location": true,
+                "availability": true
+            },
+            "is": {
+                "northern": {
+                    "new": false,
+                    "leaving": false,
+                    "available": true
+                },
+                "southern": {
+                    "new": false,
+                    "leaving": true,
+                    "available": true
+                }
+            }
+        },
+        "converted": true
     }
 ]
