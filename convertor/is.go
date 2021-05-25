@@ -38,15 +38,17 @@ func GenerateIs(t time.Time, item targetstructures.Item) map[string]map[string]b
 
 	is := make(map[string]map[string]bool)
 
-	is["northern"] = make(map[string]bool)
-	is["northern"]["new"] = IsNew(t, n.Sequences, n.Always)
-	is["northern"]["leaving"] = IsLeaving(t, n.Sequences, n.Always)
-	is["northern"]["available"] = IsAvailable(t, n.Array, n.Always)
+	is["new"] = make(map[string]bool)
+	is["leaving"] = make(map[string]bool)
+	is["available"] = make(map[string]bool)
 
-	is["southern"] = make(map[string]bool)
-	is["southern"]["new"] = IsNew(t, s.Sequences, s.Always)
-	is["southern"]["leaving"] = IsLeaving(t, s.Sequences, s.Always)
-	is["southern"]["available"] = IsAvailable(t, s.Array, s.Always)
+	is["new"]["northern"] = IsNew(t, n.Sequences, n.Always)
+	is["leaving"]["northern"] = IsLeaving(t, n.Sequences, n.Always)
+	is["available"]["northern"] = IsAvailable(t, n.Array, n.Always)
+
+	is["new"]["southern"] = IsNew(t, s.Sequences, s.Always)
+	is["leaving"]["southern"] = IsLeaving(t, s.Sequences, s.Always)
+	is["available"]["southern"] = IsAvailable(t, s.Array, s.Always)
 
 	return is
 }
