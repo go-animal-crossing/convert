@@ -3,8 +3,9 @@ package targetstructures
 import "time"
 
 type Output struct {
-	Time time.Time       `json:"time_generated"`
-	All  map[string]Item `json:"all"`
+	Time   time.Time       `json:"time_generated"`
+	All    map[string]Item `json:"all"`
+	Sorted []Item          `json:"sorted"`
 }
 
 // Item is a target structure
