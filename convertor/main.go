@@ -52,8 +52,9 @@ func Convert(fs afero.Fs, directory string, items []apistructures.Item) {
 			fmt.Printf("  %-6v| %s\n", i.Type, transformed.Attributes.URIS.Slug)
 		})
 	}
-	out.Sort()
+
 	wp.StopWait()
+	out.Sort()
 
 	println("\n")
 	t := table.NewWriter()
